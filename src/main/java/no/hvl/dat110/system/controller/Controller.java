@@ -31,8 +31,8 @@ public class Controller  {
 		// connect to sensor and display RPC servers
 		// read value from sensor using RPC and write to display using RPC
 			
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		DisplayStub displayStub = new DisplayStub(displayclient);
+		SensorStub sensorStub = new SensorStub(sensorclient);
 		
 		// TODO - END
 		

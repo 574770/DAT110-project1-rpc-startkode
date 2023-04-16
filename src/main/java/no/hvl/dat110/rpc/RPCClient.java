@@ -20,9 +20,7 @@ public class RPCClient {
 		
 		// TODO - START
 		// connect using the RPC client
-		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		connection = msgclient.connect();
 		
 		// TODO - END
 	}
@@ -32,8 +30,7 @@ public class RPCClient {
 		// TODO - START
 		// disconnect by closing the underlying messaging connection
 		
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		connection.close();
 		
 		// TODO - END
 	}
@@ -59,8 +56,24 @@ public class RPCClient {
 
 		*/
 				
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
+		byte[] messageData = RPCUtils.encapsulate(rpcid, param);
+		Message messageObj = new Message(messageData);
+		connection.send(messageObj);
+		boolean isReturnVal = false;
+		Message returnMessage = null;
+		while (!isReturnVal){
+			returnMessage = connection.receive();
+			if(returnMessage == null){
+				isReturnVal = true;
+				return null;
+			}
+			if(returnMessage.getData()[0] == rpcid){
+				isReturnVal = true;
+			System.out.println("xsredgf");
+			}
+		}
+		System.out.println("xsredgf");
+		returnval = RPCUtils.decapsulate(returnMessage.getData());
 		
 		// TODO - END
 		return returnval;
